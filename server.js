@@ -21,7 +21,7 @@ async function start() {
 
     // Routes
     app.get('/', (req, res) => res.send('Daily Scheduler API is running'));
-    app.use('/tasks', require('./routes/taskRoutes')); // if you have task routes
+    app.use('/tasks', require('./routes/tasks')); // if you have task routes
 
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`));
