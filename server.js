@@ -1,8 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const Task = require('./models/Task'); // make sure this is correct path
-
-require('dotenv').config();
+const cors = require('cors');
 
 async function start() {
   try {
@@ -10,35 +9,19 @@ async function start() {
     console.log('✅ Connected to MongoDB Atlas');
 
     const app = express();
+
+    // CORS setup - allow all origins (for now)
+    app.use(cors({
+      origin: "*", // allow all
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type"]
+    }));
+
     app.use(express.json());
 
-    // Test route
+    // Routes
     app.get('/', (req, res) => res.send('Daily Scheduler API is running'));
-
-    // --- GET all tasks ---
-    app.get('/tasks', async (req, res) => {
-      const tasks = await Task.find();
-      res.json(tasks);
-    });
-
-    // --- POST create new task ---
-    app.post('/tasks', async (req, res) => {
-      const task = new Task(req.body);
-      await task.save();
-      res.status(201).json(task);
-    });
-
-    // --- PUT update task ---
-    app.put('/tasks/:id', async (req, res) => {
-      const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
-      res.json(updatedTask);
-    });
-
-    // --- DELETE remove task ---
-    app.delete('/tasks/:id', async (req, res) => {
-      await Task.findByIdAndDelete(req.params.id);
-      res.json({ message: 'Task deleted' });
-    });
+    app.use('/tasks', require('./routes/taskRoutes')); // if you have task routes
 
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`));
@@ -47,5 +30,4 @@ async function start() {
     process.exit(1);
   }
 }
-
 start();
