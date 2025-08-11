@@ -24,10 +24,11 @@ async function start() {
     app.use('/tasks', require('./routes/tasks')); // if you have task routes
 
     const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(🚀 Server listening on http://localhost:${PORT}));
+    app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`));
   } catch (err) {
     console.error('❌ Failed to start', err);
     process.exit(1);
   }
 }
+
 start();
