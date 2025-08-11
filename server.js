@@ -14,14 +14,19 @@ async function start() {
     app.use(cors({
       origin: "*", // allow all
       methods: ["GET", "POST", "PUT", "DELETE"],
-      allowedHeaders: ["Content-Type"]
+      allowedHeaders: ["Content-Type", "Authorization"] // Added Authorization for JWT
     }));
 
     app.use(express.json());
 
     // Routes
     app.get('/', (req, res) => res.send('Daily Scheduler API is running'));
-    app.use('/tasks', require('./routes/tasks')); // if you have task routes
+
+    // Auth routes (login/signup)
+    app.use('/auth', require('./routes/auth')); // NEW - handles signup/login
+
+    // Task routes (protected)
+    app.use('/tasks', require('./routes/tasks'));
 
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`));
