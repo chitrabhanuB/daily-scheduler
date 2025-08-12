@@ -23,7 +23,6 @@ async function start() {
     app.get('/', (req, res) => res.send('Daily Scheduler API is running'));
     app.use("/auth", require("./routes/auth"));
     app.use("/tasks", require("./routes/tasks"));
-    app.use("/feedback", require("./routes/feedback")); // ✅ Added feedback route
 
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`🚀 Server listening on http://localhost:${PORT}`));
