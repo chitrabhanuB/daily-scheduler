@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken");
 
-export function authMiddleware(req, res, next) {
+function auth(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1]; // "Bearer token"
   if (!token) {
     return res.status(401).json({ error: "Please login first" });
@@ -14,3 +14,5 @@ export function authMiddleware(req, res, next) {
     res.status(401).json({ error: "Invalid or expired token" });
   }
 }
+
+module.exports = auth;
