@@ -277,9 +277,9 @@ This project is licensed under the MIT License. You can use, modify, and distrib
 Here are some examples of API testing done with Thunder Client in VS Code:
 
 ### Screenshots 
-![Thunder Client – All Tasks](./demo/screenshot1.png)
-![Thunder Client – Create Task](./demo/screenshot2.png)
-![MongoDB Atlas – Tasks Collection](./demo/screenshot3.png)
+![Thunder Client –All the thunder client functions](./demo/Screenshot1.png)
+![Thunder Client – local server running](./demo/Screenshot2.png)
+![MongoDB Atlas – render deployment](./demo/Screenshot3.png)
 
 
 ### Screen Recording
